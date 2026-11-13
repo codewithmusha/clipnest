@@ -1,0 +1,13 @@
+ClipNest ko FREE live kaise karein (4 steps)
+
+1. ClipNest_Video_Downloader.zip ko extract karo.
+2. github.com par naya repository banao aur ClipNest folder ke ANDAR wali saari files/folders upload karo. (Dockerfile aur app.py repo ke root me hone chahiye.)
+3. render.com par New > Web Service > apna GitHub repository connect karo.
+4. Runtime/Language: Docker, Instance: Free select karo. Deploy Web Service par click karo.
+
+Render par https://...onrender.com wala free live URL mil jayega.
+
+Website mein Dark/Light theme option hai. Video preview aur download ke liye Python backend zaroori hai — sirf HTML file double-click karne se downloader nahi chalega.
+
+NOTE: Har platform ka har video download nahi hoga. Kuch platforms login maangte hain ya server IP block karte hain. Sirf aise public videos download karein jinhe save karne ki permission ho.
+Render Free service 15 minutes idle hone par so jaati hai, aur downloaded files temporary rehti hain.
