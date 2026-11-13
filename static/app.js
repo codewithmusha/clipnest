@@ -27,12 +27,55 @@
     root.dataset.theme = next;
     el("theme-label").textContent = next === "dark" ? "Light mode" : "Dark mode";
     el("theme-toggle").setAttribute("aria-label", `Switch to ${next === "dark" ? "light" : "dark"} theme`);
-    document.querySelector('meta[name="theme-color"]').setAttribute("content", next === "dark" ? "#0c0d16" : "#f8f9fd");
+    document.querySelector('meta[name="theme-color"]').setAttribute("content", next === "dark" ? "#071725" : "#f3f8fb");
     try { localStorage.setItem("clipnest-theme", next); } catch { /* private browsing */ }
   }
   applyTheme(theme);
   el("theme-toggle").addEventListener("click", () => applyTheme(theme === "dark" ? "light" : "dark"));
   el("year").textContent = String(new Date().getFullYear());
+
+  // Optional GA4 tracking. It is DISABLED by default and asks for consent first.
+  // Never send video URLs, titles, or other pasted content to analytics.
+  const gaId = String(window.CLIPNEST_CONFIG?.gaMeasurementId || "").trim();
+  let analyticsEnabled = false;
+  function track(eventName, platform = "unknown") {
+    if (analyticsEnabled && typeof window.gtag === "function") {
+      window.gtag("event", eventName, {platform: String(platform).slice(0, 30)});
+    }
+  }
+  function enableAnalytics() {
+    if (analyticsEnabled || !/^G-[A-Z0-9]{6,}$/i.test(gaId)) return;
+    analyticsEnabled = true;
+    const script = document.createElement("script");
+    script.async = true;
+    script.src = `https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(gaId)}`;
+    document.head.appendChild(script);
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = function () {window.dataLayer.push(arguments);};
+    window.gtag("js", new Date());
+    window.gtag("config", gaId);
+  }
+  if (/^G-[A-Z0-9]{6,}$/i.test(gaId)) {
+    let consent = "";
+    try {consent = localStorage.getItem("clipnest-analytics-consent") || "";} catch {}
+    if (consent === "yes") enableAnalytics();
+    if (!consent) {
+      const notice = document.createElement("div");
+      notice.className = "consent-banner";
+      notice.setAttribute("role", "dialog");
+      notice.setAttribute("aria-label", "Analytics consent");
+      notice.innerHTML = `<div><strong>Help us improve ClipNest</strong><p>May we use Google Analytics to measure visits and anonymous download events? See our <a href="/privacy">Privacy Policy</a>.</p></div><div class="consent-actions"><button type="button" class="consent-no">No thanks</button><button type="button" class="consent-yes">Allow analytics</button></div>`;
+      document.body.appendChild(notice);
+      const finish = (answer) => {
+        try {localStorage.setItem("clipnest-analytics-consent", answer);} catch {}
+        if (answer === "yes") enableAnalytics();
+        notice.remove();
+      };
+      notice.querySelector(".consent-yes").addEventListener("click", () => finish("yes"));
+      notice.querySelector(".consent-no").addEventListener("click", () => finish("no"));
+    }
+  }
+
 
   function message(node, text) {
     node.textContent = text || "";
@@ -41,7 +84,7 @@
   function toggleFind(loading) {
     busy = loading;
     findBtn.disabled = loading || jobRunning;
-    el("find-text").textContent = loading ? "Finding your video..." : "Find my video";
+    el("find-text").textContent = loading ? "Checking link..." : "Download";
     el("find-loader").hidden = !loading;
     el("find-arrow").hidden = loading;
   }
@@ -107,6 +150,7 @@
       const data = await api("/api/info", {url});
       if (token !== requestToken) return;
       resolvedUrl = url;
+      track("video_info_success", data.platform);
       el("video-platform").textContent = data.platform || "Video";
       el("video-title").textContent = data.title || "Untitled video";
       el("video-meta").textContent = [data.uploader, prettyDuration(data.duration)].filter(Boolean).join(" · ");
@@ -121,7 +165,10 @@
       preview.hidden = false;
       preview.scrollIntoView({behavior: "smooth", block: "nearest"});
     } catch (error) {
-      if (token === requestToken) message(formMessage, error.message);
+      if (token === requestToken) {
+        track("video_info_failed");
+        message(formMessage, error.message);
+      }
     } finally { if (token === requestToken) toggleFind(false); }
   });
 
@@ -139,6 +186,7 @@
         const url = data.download_url;
         readyLink.href = url;
         readyLink.hidden = false;
+        track("video_ready", el("video-platform").textContent);
         readyLink.textContent = "↓ Save video to device";
         // User clicks the visible save link once the file is ready.
         // This is more reliable than a delayed, automatically triggered download.
@@ -164,11 +212,13 @@
     progressBox.hidden = false;
     el("progress-note").textContent = "Please keep this page open while we prepare your file.";
     try {
+      track("download_started", el("video-platform").textContent);
       const result = await api("/api/download", {url: resolvedUrl, quality: el("quality").value});
       await pollJob(result.job_id);
       downloadBtn.textContent = "Download complete ✓";
     } catch (error) {
       progressBox.hidden = true;
+      track("download_failed", el("video-platform").textContent);
       message(jobMessage, error.message);
       downloadBtn.disabled = false;
       downloadBtn.textContent = "Try downloading again";
