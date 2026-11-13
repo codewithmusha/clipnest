@@ -1,0 +1,50 @@
+CLIPNEST V2 - UPDATE AND TRACKING GUIDE (HINGLISH)
+
+1. WEBSITE UPDATE (GitHub -> Render)
+   a) GitHub par https://github.com/codewithmusha/clipnest open karo.
+   b) Is ZIP ko extract karo; ClipNest folder ke ANDAR ki files upload karo.
+   c) Add file > Upload files. Existing files overwrite honi chahiye.
+   d) Commit changes. Render automatically redeploy karega.
+   e) Agar automatic deploy na ho, Render > ClipNest > Manual Deploy > Deploy latest commit.
+   f) Deployed site par Ctrl+Shift+R se refresh karo.
+   IMPORTANT: Old ZIP ki jagah poora v2 project upload karne se backend ka Deno/yt-dlp fix bhi include hoga.
+
+2. WEBSITE TRAFFIC - GOOGLE ANALYTICS (GA4)
+   a) https://analytics.google.com/ par property create karo.
+   b) Data stream > Web select karo; website URL bharo.
+   c) Measurement ID copy karo (format G-XXXXXXXXXX).
+   d) GitHub par static/site-config.js edit karo. Empty gaMeasurementId ko apni G-ID se replace karo.
+   e) Commit changes -> Render redeploy.
+   f) GA4 opted-in visitors ko measure karega. Consent banner website par aayega.
+   g) Realtime report aur Reports > Engagement > Events mein download_started, video_ready etc dekh sakte ho.
+   h) Exact actual file downloads ke liye server-side event logging + persistent database future mein add karna hoga. GA4 events ka matlab delivered file confirm nahi hai.
+
+3. GOOGLE SEARCH CONSOLE
+   https://search.google.com/search-console/ par website property verify karo.
+   SEO clicks/impressions dekhne ke liye use karo. Domain connect karne ke baad aur helpful.
+
+4. ADS (GOOGLE ADSENSE)
+   - Google Ads = paid advertising karna; Google AdSense = website par ads dikhakar earn karna.
+   - https://www.google.com/adsense/start/ par apply karna hota hai.
+   - AdSense approval guaranteed nahi. Google policy specifically disallows tools that enable downloads of streaming videos against provider restrictions, and copyright infringement.
+   - Production use se pahle original helpful content, final Privacy/Terms, operator contact, policy review aur domain taiyar karo.
+   - Ads ko Download button ke paas misleading tarah se mat rakhna.
+   - Ads.txt aur ad placement ko approval ke baad add karo.
+
+5. IMPORTANT HOSTING LIMITS
+   - 20,000 video-minutes PER DAY possible hona automatically guaranteed nahi.
+   - Server capacity bitrate, file size, requests, bandwidth aur extraction restrictions par depend karta hai.
+   - Current code limits: 200MB/video, 30min/video, 2 concurrent downloads, 16 requests/hour/IP.
+   - Render Free: 512MB RAM and free instance/bandwidth limits. Free plan testing ke liye sahi hai, mass-volume downloading ke liye nahi.
+   - Site sirf authorised public links ke liye rakho; har platform ka download guarantee nahi.
+
+6. CUSTOM DESIGN
+   - Font: Google Poppins + system font fallback
+   - Dark & light mode
+   - Hero: deep blue to teal gradient; green primary CTA; yellow brand highlights
+   - Styles: static/styles.css
+   - Frontend content: static/index.html
+   - Interactions: static/app.js
+   - Consent + GA measurement ID: static/site-config.js
+   - Legal starter pages: static/privacy.html, static/terms.html
+   - Backend and supported sites: app.py

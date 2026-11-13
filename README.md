@@ -1,58 +1,45 @@
-# ClipNest — Free Video Downloader Website Starter
+# ClipNest V2 — All-in-One Video Downloader Website
 
-A clean, responsive **dark + light theme** website, built with **HTML + CSS + JavaScript + Python (FastAPI) + yt-dlp + FFmpeg**.
+A responsive downloader website with dark/light mode, Poppins typography, original blue-to-teal branding, a single-URL workflow and a Python backend. This UI was designed independently, using the familiar simple video-downloader page pattern as inspiration; it is not a copy of another service's copyrighted assets or branding.
 
-### Features
-- One link field for supported sites (YouTube, Instagram, Facebook, X/Twitter, TikTok, LinkedIn, Vimeo, Reddit, Pinterest and more).
-- Preview with video title / thumbnail where available.
-- Best available / 1080p / 720p / 480p options (only if the source offers them).
-- Download progress and a clear save-file button when the video is ready.
-- Dark / light theme, saved in your browser.
-- Mobile-friendly, no database, no login, no API key.
-- Free-server guardrails: HTTPS domain allowlist, 2 concurrent downloads max, basic per-IP rate limit, 200 MB / 30 minute cap, files expire after 15 minutes.
+## Features
+- Responsive site, mobile and desktop layout, theme memory
+- Paste URL, fetch supported public video metadata, select available format, download within hosting capacity
+- FastAPI / yt-dlp / FFmpeg backend, Deno runtime included in Docker image for supported YouTube playback checks
+- Basic abuse limits and supported-domain validation
+- Optional Google Analytics 4 integration (disabled by default; loads only after explicit consent)
+- Starter Privacy and Terms pages (owner must review and customise before production)
+- Original FAQs and how-to explanations
 
-**IMPORTANT:** Only use this to download content that you own or are authorized to save, and follow each platform's rules. This is not a DRM bypass, private-video downloader, or a promise that every platform works. Platforms often require sign-in or block hosting-provider IPs (especially YouTube). Downloads are not guaranteed; availability changes as platforms update.
+## Deploy to Render
+1. Extract the ZIP and open the **ClipNest** subfolder. Upload its files *and folders* into the root of your GitHub repository.
+2. Render > New Web Service > GitHub repository > Language Docker > Free (for testing).
+3. Leave Root Directory empty, deploy and access the Render-issued URL.
+4. Future GitHub commits automatically redeploy if auto-deploy is on.
 
-## Deploy free on Render (simple steps)
-1. Create a **GitHub** repository and upload **all these files and the `static` folder**. Keep the `Dockerfile` at the root.
-2. Open [dashboard.render.com](https://dashboard.render.com) → **New** → **Web Service**.
-3. Connect the GitHub repository.
-4. Choose **Language/Runtime: Docker** and **Instance Type: Free**. (Render should find the Dockerfile automatically.)
-5. Click **Deploy Web Service**. Render provides a URL similar to `https://your-app-name.onrender.com`.
-6. Open that URL. Your website is live. You don't need to purchase a domain to test.
+See `UPDATES_HINDI.txt` for step-by-step Hinglish instructions.
 
-You can also import `render.yaml` as a Render Blueprint. Your app listens on the `PORT` provided by Render.
+## Tracking visitors
+1. Create a GA4 web data stream at https://analytics.google.com.
+2. Put your own `G-...` measurement ID into `static/site-config.js`, commit and redeploy.
+3. Consent banner is shown on the website. Visitors who reject are not measured via GA4.
+4. GA4 logs visits and basic platform-level events (`video_info_success`, `video_info_failed`, `download_started`, `video_ready`, `download_failed`). **URLs and video titles are not sent to GA4** by this implementation.
+5. Backend rate limits are not a persistent analytics datastore. Track precise completed downloads separately with a proper database, preferably after adding abuse and privacy controls.
 
-### Free-hosting limitations
-Render Free is intended for experiments: it sleeps after **15 minutes of inactivity**, has bandwidth/compute limits, and **temporary files are lost when it sleeps or restarts**. Large videos, public traffic and some platform sites may fail. It may suspend services generating unusually high outbound traffic. Do not promise visitors unlimited free downloading.
+## Monetisation note
+AdSense approval is *not guaranteed*. Google Publisher Policies restrict sites that enable downloading streaming videos where prohibited by a provider. Copyright rules, clear site purpose, original content, privacy terms and safe ad placements matter. Never disguise an ad as a Download button. Google Ads (buy traffic) and Google AdSense (earn from displaying ads) are different products.
 
-## Run on your computer
-Python 3.10+ and **FFmpeg** installed:
+## Current free-demo limits
+- Max 30 minutes per clip; max 200 MB output file.
+- 2 active jobs at once; 16 requests/hour per IP.
+- Temporary files are eligible for cleanup after 15 minutes.
+- Links must use HTTPS and match known platform domains. No playlist, login, cookie or DRM bypass.
+- Source platforms and Render can still block video extraction; site UI working does not guarantee every link works.
+- Render Free instances are **not** recommended for high-volume production use.
 
-```bash
-python -m venv .venv
-# Windows: .venv\Scripts\activate
-# Mac/Linux: source .venv/bin/activate
-pip install -r requirements.txt
-uvicorn app:app --reload
+## Quick tests
 ```
-
-Visit `http://127.0.0.1:8000`.
-
-## Project files
-- `static/index.html` — website
-- `static/styles.css` — dark/light theme and responsive layout
-- `static/app.js` — UI, preview, progress and downloads
-- `app.py` — FastAPI backend, URL validation, safe limits, temporary downloads
-- `Dockerfile` — includes FFmpeg for Render
-- `render.yaml` — optional one-click setup
-
-## Customization
-- Brand and copy: `static/index.html`
-- Colors: CSS variables at the start of `static/styles.css`
-- Limits / supported hostname list: constants in `app.py`
-
-## Hindi short guide
-भाई, ZIP extract करो → GitHub पर सारी files upload करो → Render पर **New Web Service** बनाकर **Docker + Free** select करो → Deploy करो। URL मिल जाएगा। Theme switch और mobile design पहले से तैयार हैं।
-
-**Note:** I can build the project files here, but the actual Render deployment requires access to your own GitHub/Render accounts. This starter was tested locally; platform downloads depend on live platform access and are not guaranteed.
+pip install -r requirements.txt pytest httpx
+pytest -q
+```
+The test suite mocks platform extraction; it does not guarantee access to YouTube, Instagram, etc. from any hosting IP.

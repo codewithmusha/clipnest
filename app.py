@@ -119,6 +119,10 @@ def options(**kwargs):
 
 def clean_error(error: Exception) -> str:
     message = str(error).lower()
+    if any(t in message for t in ("sign in to confirm", "not a bot", "unusual traffic")):
+        return "YouTube is blocking this server's access. Try another permitted public video; some servers cannot access YouTube."
+    if any(t in message for t in ("javascript runtime", "challenge solving", "no supported javascript")):
+        return "YouTube playback checks could not run. The server's yt-dlp/Deno setup may need an update."
     if any(t in message for t in ("login", "sign in", "private", "cookies", "authentication")):
         return "This video may require sign-in or be private. Try a public video you have permission to save."
     if any(t in message for t in ("unsupported url", "no suitable extractor")):
@@ -254,6 +258,16 @@ def run_job(job_id: str, url: str, platform: str, quality: str):
 @app.get("/", include_in_schema=False)
 def homepage():
     return FileResponse(STATIC / "index.html", media_type="text/html")
+
+
+@app.get("/privacy", include_in_schema=False)
+def privacy():
+    return FileResponse(STATIC / "privacy.html", media_type="text/html")
+
+
+@app.get("/terms", include_in_schema=False)
+def terms():
+    return FileResponse(STATIC / "terms.html", media_type="text/html")
 
 
 @app.get("/api/health")
