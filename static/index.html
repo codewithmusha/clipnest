@@ -3,92 +3,114 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#0b0d16">
-  <meta name="description" content="ClipNest is a clean, simple place to save public videos you're permitted to download from supported platforms.">
-  <title>ClipNest — Every video, one simple place</title>
+  <meta name="theme-color" content="#071725">
+  <meta name="description" content="ClipNest makes it easy to find download options for supported public videos you own or have permission to save. Paste a link, preview, choose a quality and save.">
+  <title>ClipNest – Free Online Video Downloader for Supported Links</title>
   <link rel="icon" href="/static/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="/static/styles.css">
-  <script defer src="/static/app.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/styles.css?v=2">
+  <script defer src="/static/site-config.js"></script>
+  <script defer src="/static/app.js?v=2"></script>
 </head>
 <body>
-  <div class="ambient ambient-1" aria-hidden="true"></div>
-  <div class="ambient ambient-2" aria-hidden="true"></div>
-  <header class="site-header">
-    <div class="container nav-bar">
-      <a class="brand" href="/" aria-label="ClipNest home">
-        <span class="brand-mark" aria-hidden="true">
-          <svg width="23" height="23" viewBox="0 0 24 24" fill="none"><path d="M9.4 7.1 17 12l-7.6 4.9V7.1Z" fill="currentColor"/><rect x="2.5" y="2.5" width="19" height="19" rx="6" stroke="currentColor" stroke-width="1.8"/></svg>
-        </span>
-        <span>clip<span class="brand-accent">nest</span></span>
-      </a>
-      <div class="nav-actions">
-        <a class="nav-link" href="#how-it-works">How it works</a>
-        <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch to light theme" title="Change theme">
-          <svg class="icon-sun" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42"/></svg>
-          <svg class="icon-moon" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M20.8 14.7A9 9 0 0 1 9.3 3.2 9 9 0 1 0 20.8 14.7Z"/></svg>
-          <span id="theme-label">Light mode</span>
-        </button>
-      </div>
-    </div>
-  </header>
-
-  <main>
-    <section class="hero container" aria-labelledby="hero-title">
-      <div class="eyebrow"><span class="eyebrow-dot"></span> YOUR ALL-IN-ONE VIDEO TOOL <span class="sparkle" aria-hidden="true">✦</span></div>
-      <h1 id="hero-title">Your favorite videos.<br><span class="headline-accent">One simple place.</span></h1>
-      <p class="hero-subtitle">Paste a link, choose your quality, and save your video. No complicated steps, just a smoother way to download.</p>
-
+<header class="site-header">
+  <div class="container nav-bar">
+    <a class="brand" href="/" aria-label="ClipNest home">
+      <span class="brand-emblem" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none"><rect x="2" y="2" width="28" height="28" rx="10" fill="currentColor"/><path d="m13 9 11 7-11 7V9Z" fill="#09253C"/></svg></span>
+      <span class="brand-name"><span>Clip</span><span class="brand-white">Nest</span><span class="brand-dot">.</span></span>
+    </a>
+    <nav class="main-nav" aria-label="Main navigation">
+      <a href="#home" class="active">Home</a>
+      <a href="#supported">Platforms</a>
+      <a href="#how-it-works">How it works</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <button type="button" class="theme-toggle" id="theme-toggle" aria-label="Switch to light theme" title="Toggle appearance">
+      <svg class="icon-sun" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42"/></svg>
+      <svg class="icon-moon" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M20.8 14.7A9 9 0 0 1 9.3 3.2 9 9 0 1 0 20.8 14.7Z"/></svg>
+      <span id="theme-label">Light mode</span>
+    </button>
+  </div>
+</header>
+<main>
+  <section class="hero" id="home" aria-labelledby="hero-title">
+    <div class="hero-orb hero-orb-1" aria-hidden="true"></div><div class="hero-orb hero-orb-2" aria-hidden="true"></div>
+    <div class="container hero-content">
+      <div class="hero-kicker"><span class="kicker-pulse"></span> SIMPLE • FAST • ONE LINK</div>
+      <h1 id="hero-title"><span class="text-yellow">All-in-One</span> Video Downloader</h1>
+      <p class="hero-desc">Videos, Reels & Shorts — all in one simple place.</p>
+      <p class="hero-detail">Paste a supported public video link, preview it, and choose your preferred download quality.</p>
       <div class="downloader" id="downloader">
-        <div class="downloader-head">
-          <div class="section-icon"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13.5a5 5 0 0 0 7.07 0l2-2a5 5 0 0 0-7.07-7.07l-1.15 1.16"/><path d="M14 10.5a5 5 0 0 0-7.07 0l-2 2a5 5 0 0 0 7.07 7.07l1.15-1.16"/></svg></div>
-          <div><h2>Video downloader</h2><p>Start by pasting your video link below.</p></div>
-          <div class="safe-label"><span class="safe-dot"></span> Simple & secure</div>
-        </div>
         <form id="url-form" class="url-form" novalidate>
-          <label for="video-url" class="input-label">VIDEO URL</label>
-          <div class="url-input-wrap">
-            <svg class="link-symbol" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="m10 13 4-4M8.6 15.4l-2.1 2.1a4 4 0 0 1-5.7-5.7l4.6-4.6a4 4 0 0 1 5.7 0M15.4 8.6l2.1-2.1a4 4 0 0 1 5.7 5.7l-4.6 4.6a4 4 0 0 1-5.7 0" transform="translate(1 0) scale(.92)"/></svg>
-            <input id="video-url" name="url" type="url" inputmode="url" autocomplete="url" spellcheck="false" placeholder="https://www.instagram.com/reel/..." aria-describedby="url-help" required>
-            <button type="button" class="paste-btn" id="paste-btn"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="8" y="4" width="12" height="17" rx="2"/><path d="M16 4V3a1 1 0 0 0-1-1h-3M4 7v11a2 2 0 0 0 2 2"/></svg> Paste</button>
+          <div class="url-field">
+            <label class="sr-only" for="video-url">Paste video link</label>
+            <svg class="link-symbol" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.1 0l3-3A5 5 0 0 0 13 3l-1.7 1.7"/><path d="M14 11a5 5 0 0 0-7.1 0l-3 3A5 5 0 0 0 11 21l1.7-1.7"/></svg>
+            <input id="video-url" name="url" type="url" inputmode="url" autocomplete="url" spellcheck="false" placeholder="Paste your video link here..." aria-describedby="url-help" required>
+            <button type="button" class="paste-btn" id="paste-btn" title="Paste from clipboard">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="8" y="4" width="12" height="17" rx="2"/><path d="M16 4V3a1 1 0 0 0-1-1h-3M4 7v11a2 2 0 0 0 2 2"/></svg> Paste
+            </button>
           </div>
-          <p id="url-help" class="input-help">Works with supported public video links. No sign-in required.</p>
-          <button id="find-btn" type="submit" class="primary-btn"> <span id="find-text">Find my video</span><svg id="find-arrow" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-6-6 6 6-6 6"/></svg><span id="find-loader" class="spinner" hidden></span></button>
-          <div id="form-message" class="form-message" role="alert" hidden></div>
+          <button id="find-btn" type="submit" class="primary-btn">
+            <svg id="find-arrow" width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v13m-5-5 5 5 5-5M4 17v4h16v-4"/></svg>
+            <span id="find-text">Download</span><span id="find-loader" class="spinner" hidden></span>
+          </button>
         </form>
+        <div id="form-message" class="form-message" role="alert" hidden></div>
         <div id="preview" class="preview" hidden>
-          <div class="preview-divider"></div>
-          <div class="preview-title">YOUR VIDEO <span class="ready-pill">✓ Link found</span></div>
+          <div class="preview-heading">YOUR VIDEO <span class="ready-pill">✓ Found</span></div>
           <div class="video-info">
-            <div class="video-thumb"><img id="video-thumbnail" alt="Video thumbnail" referrerpolicy="no-referrer" hidden><div id="thumbnail-fallback" class="thumb-fallback"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="m8 5 12 7-12 7V5Z"/></svg></div></div>
+            <div class="video-thumb"><img id="video-thumbnail" alt="Video thumbnail" referrerpolicy="no-referrer" hidden><div id="thumbnail-fallback" class="thumb-fallback"><svg width="30" height="30" viewBox="0 0 24 24" fill="currentColor"><path d="m8 5 12 7-12 7V5Z"/></svg></div></div>
             <div class="video-details"><span class="platform-tag" id="video-platform">Video</span><h3 id="video-title">Video title</h3><p id="video-meta">Ready for download</p></div>
           </div>
-          <div class="download-settings"><div><label class="input-label" for="quality">VIDEO QUALITY</label><select id="quality" name="quality"><option value="best">Best available</option><option value="1080">1080p</option><option value="720" selected>720p</option><option value="480">480p</option></select></div><button id="download-btn" class="primary-btn download-btn" type="button"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m-5-5 5 5 5-5M4 17v4h16v-4"/></svg> Download video</button></div>
-          <div id="job-progress" class="job-progress" hidden><div class="progress-label"><span id="progress-text">Preparing video...</span><strong id="progress-percent"></strong></div><div class="progress-track"><div class="progress-fill" id="progress-fill"></div></div><p id="progress-note" class="progress-note">Please keep this page open while we prepare your file.</p></div>
+          <div class="download-settings">
+            <div><label class="input-label" for="quality">Select video quality</label><select id="quality" name="quality"><option value="best">Best available</option><option value="1080">1080p (when available)</option><option value="720" selected>720p (when available)</option><option value="480">480p (when available)</option></select></div>
+            <button id="download-btn" class="primary-btn download-btn" type="button"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m-5-5 5 5 5-5M4 17v4h16v-4"/></svg> Download video</button>
+          </div>
+          <div id="job-progress" class="job-progress" hidden><div class="progress-label"><span id="progress-text">Preparing video...</span><strong id="progress-percent"></strong></div><div class="progress-track"><div class="progress-fill" id="progress-fill"></div></div><p id="progress-note" class="progress-note">Please keep this page open while your file is prepared.</p></div>
           <div id="job-message" class="form-message" role="alert" hidden></div>
-          <a id="ready-link" class="ready-link" href="#" hidden><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 3v12m-5-5 5 5 5-5M4 17v4h16v-4"/></svg> Save your file</a>
-        </div>
-        <div class="downloader-footer"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg> Only download content you own or have permission to save.</div>
-      </div>
-
-      <div class="platforms" aria-label="Supported platforms"><p>MADE FOR YOUR FAVORITE PLATFORMS</p>
-        <div class="platform-row">
-          <span class="platform-chip"><span class="chip-icon youtube">▶</span> YouTube</span>
-          <span class="platform-chip"><span class="chip-icon instagram">◎</span> Instagram</span>
-          <span class="platform-chip"><span class="chip-icon facebook">f</span> Facebook</span>
-          <span class="platform-chip"><span class="chip-icon x-brand">𝕏</span> X / Twitter</span>
-          <span class="platform-chip"><span class="chip-icon tiktok">♪</span> TikTok</span>
-          <span class="platform-chip"><span class="chip-icon linkedin">in</span> LinkedIn</span>
-          <span class="platform-chip more-chip">+ more</span>
+          <a id="ready-link" class="ready-link" href="#" hidden>↓ Save video to device</a>
         </div>
       </div>
-    </section>
-
-    <section id="how-it-works" class="how-section container" aria-labelledby="how-heading"><div class="section-heading"><div class="mini-label">SO EASY, IT'S A HABIT</div><h2 id="how-heading">Three steps. That's it.</h2><p>No extra apps, no confusing menus. Just paste and go.</p></div>
-      <div class="step-grid"><article class="step-card"><span class="step-index">01</span><div class="step-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="3" y="4" width="18" height="16" rx="3"/><path d="M7 9h10M7 13h6"/></svg></div><h3>Copy a link</h3><p>Find a public video on one of the supported platforms.</p></article>
-      <article class="step-card"><span class="step-index">02</span><div class="step-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M9 13.5 15 7.5M10.5 7H18v7.5"/><rect x="3" y="10" width="12" height="11" rx="2"/></svg></div><h3>Paste it here</h3><p>Drop the URL above and choose your preferred quality.</p></article>
-      <article class="step-card"><span class="step-index">03</span><div class="step-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 3v12m-5-5 5 5 5-5M4 17v3h16v-3"/></svg></div><h3>Save your video</h3><p>Download the file directly to your device when ready.</p></article></div>
-    </section>
-  </main>
-  <footer class="site-footer"><div class="container footer-inner"><div class="footer-brand">clip<span>nest</span><small>© <span id="year"></span> ClipNest</small></div><p>Made simple. Download responsibly. Platform availability may vary.</p><a href="#hero-title">Back to top ↑</a></div></footer>
+      <p class="hero-notice" id="url-help"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 10v6m0-9v.5"/></svg> Only download videos you own or have permission to save. Platform restrictions apply.</p>
+      <div class="quick-tags"><span>Works with supported links:</span><span>YouTube</span><span>Instagram</span><span>Facebook</span><span>X / Twitter</span><span>TikTok</span><span>+ More</span></div>
+    </div>
+  </section>
+  <section id="supported" class="platform-section section-pad">
+    <div class="container"><div class="section-heading"><span class="eyebrow">ALL YOUR FAVORITE PLATFORMS</span><h2>One place. Many platforms.</h2><p>We support links from popular video and social platforms, subject to each site's restrictions.</p></div>
+      <div class="platform-grid">
+        <article class="platform-card"><span class="platform-icon yt">▶</span><div><h3>YouTube</h3><p>Public videos & Shorts</p></div><span class="platform-chevron">↗</span></article>
+        <article class="platform-card"><span class="platform-icon ig">◎</span><div><h3>Instagram</h3><p>Public videos & Reels</p></div><span class="platform-chevron">↗</span></article>
+        <article class="platform-card"><span class="platform-icon fb">f</span><div><h3>Facebook</h3><p>Public video links</p></div><span class="platform-chevron">↗</span></article>
+        <article class="platform-card"><span class="platform-icon x">𝕏</span><div><h3>X / Twitter</h3><p>Public video posts</p></div><span class="platform-chevron">↗</span></article>
+        <article class="platform-card"><span class="platform-icon tt">♪</span><div><h3>TikTok</h3><p>Public video links</p></div><span class="platform-chevron">↗</span></article>
+        <article class="platform-card"><span class="platform-icon in">in</span><div><h3>LinkedIn</h3><p>Supported public posts</p></div><span class="platform-chevron">↗</span></article>
+        <article class="platform-card"><span class="platform-icon reddit">●</span><div><h3>Reddit</h3><p>Public video posts</p></div><span class="platform-chevron">↗</span></article>
+        <article class="platform-card"><span class="platform-icon more">+</span><div><h3>More platforms</h3><p>Other supported sites</p></div><span class="platform-chevron">↗</span></article>
+      </div>
+    </div>
+  </section>
+  <section id="how-it-works" class="how-section section-pad">
+    <div class="container"><div class="section-heading"><span class="eyebrow">HOW IT WORKS</span><h2>Download in 3 easy steps</h2><p>No complicated setup. No account needed.</p></div>
+      <div class="step-grid">
+        <article class="step-card"><div class="step-top"><span class="step-number">01</span><span class="step-illustration"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="4"/><path d="M7 9h10M7 13h7"/></svg></span></div><h3>Copy the link</h3><p>Find a public video you're allowed to save and copy its full URL.</p></article>
+        <article class="step-card"><div class="step-top"><span class="step-number">02</span><span class="step-illustration"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M10 13a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-2 2M14 11a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l2-2"/></svg></span></div><h3>Paste and preview</h3><p>Paste the video link above and check which download options are available.</p></article>
+        <article class="step-card"><div class="step-top"><span class="step-number">03</span><span class="step-illustration"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 3v13m-5-5 5 5 5-5M4 17v4h16v-4"/></svg></span></div><h3>Save your file</h3><p>Choose your quality and download when the supported video is ready.</p></article>
+      </div>
+    </div>
+  </section>
+  <section class="benefits-section section-pad">
+    <div class="container benefits-layout"><div><span class="eyebrow">BUILT TO BE SIMPLE</span><h2>Everything you need.<br><span class="mint-text">Nothing you don't.</span></h2><p>ClipNest focuses on the basics: a clean interface, clear download choices, and an easy experience on any device.</p></div><div class="benefit-list"><div><span>✓</span><div><h3>One link, one place</h3><p>No switching between separate downloader tools.</p></div></div><div><span>✓</span><div><h3>Made for mobile</h3><p>Designed for phones, tablets and desktops.</p></div></div><div><span>✓</span><div><h3>Light and dark modes</h3><p>Use the look you prefer, day or night.</p></div></div></div></div>
+  </section>
+  <section id="faq" class="faq-section section-pad"><div class="container"><div class="section-heading"><span class="eyebrow">GOOD TO KNOW</span><h2>Frequently asked questions</h2><p>Quick answers before you start.</p></div><div class="faq-list">
+    <details><summary>Is ClipNest free to use?<span>+</span></summary><p>The website currently offers a free demo. Speed, file size and usage limits apply to keep the shared server available.</p></details>
+    <details><summary>Can I download every video from every platform?<span>+</span></summary><p>No. Only certain public, permitted video links are supported. Private, restricted, DRM-protected and blocked videos may not work.</p></details>
+    <details><summary>Can I download HD videos?<span>+</span></summary><p>When available, choose Best, 1080p, 720p or 480p. Actual quality depends on the original video and platform response.</p></details>
+    <details><summary>Why did my video download fail?<span>+</span></summary><p>The link may require login, be restricted, exceed free-server limits or have a format the server can't access. Try a permitted public link instead.</p></details>
+    <details><summary>Do I need to sign up?<span>+</span></summary><p>No ClipNest account is required to check a supported public link.</p></details>
+  </div></div></section>
+</main>
+<footer class="site-footer"><div class="container footer-inner"><div class="footer-main"><div class="brand footer-logo"><span class="brand-emblem" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none"><rect x="2" y="2" width="28" height="28" rx="10" fill="currentColor"/><path d="m13 9 11 7-11 7V9Z" fill="#09253C"/></svg></span><span class="brand-name"><span>Clip</span><span class="brand-white">Nest</span><span class="brand-dot">.</span></span></div><p>Simple video downloads for authorised content.</p></div><div class="footer-links"><a href="#home">Home</a><a href="#supported">Platforms</a><a href="#how-it-works">How it works</a><a href="#faq">FAQ</a><a href="/privacy">Privacy</a><a href="/terms">Terms</a></div></div><div class="container footer-bottom"><span>© <span id="year"></span> ClipNest. All rights reserved.</span><span>Download responsibly · Independent service, not affiliated with any platform.</span></div></footer>
 </body>
 </html>
